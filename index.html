@@ -1085,6 +1085,7 @@
             id="openingVideo"
             src="./video.mp4"
             playsinline
+            webkit-playsinline="true"
             muted
             preload="auto"
         ></video>
@@ -1886,50 +1887,73 @@
 
 
         /* Show the video's own first frame as the "poster" instead
-           of a black box. Some browsers won't paint a frame until
-           playback has actually started, so we briefly play (muted,
-           so autoplay isn't blocked) and immediately pause. */
+           of a black box. Seeking to a tiny offset forces mobile
+           browsers to decode and paint that frame without needing
+           an actual playback attempt (which mobile browsers are
+           more likely to block before the user has tapped). As a
+           belt-and-suspenders fallback, we also try a quick muted
+           play+pause once the seek lands, since some browsers only
+           paint a frame after playback has briefly started. */
 
         function primeFirstFrame() {
 
-            openingVideo.currentTime = 0;
+            function trySeek() {
 
-            const primePromise = openingVideo.play();
+                try {
 
-            if (primePromise !== undefined) {
+                    openingVideo.currentTime = 0.05;
 
-                primePromise
-                    .then(function () {
-
-                        openingVideo.pause();
-                        openingVideo.currentTime = 0;
-
-                    })
-                    .catch(function () {
-
-                        /* Autoplay blocked entirely; nothing more
-                           we can do until the user taps. */
-
-                    });
+                } catch (e) {}
 
             }
 
-        }
+            if (openingVideo.readyState >= 1) {
 
+                trySeek();
 
-        if (openingVideo.readyState >= 2) {
+            } else {
 
-            primeFirstFrame();
+                openingVideo.addEventListener(
+                    "loadedmetadata",
+                    trySeek,
+                    { once: true }
+                );
 
-        } else {
+            }
 
             openingVideo.addEventListener(
-                "loadeddata",
-                primeFirstFrame,
+                "seeked",
+                function onSeeked() {
+
+                    const primePromise = openingVideo.play();
+
+                    if (primePromise !== undefined) {
+
+                        primePromise
+                            .then(function () {
+
+                                openingVideo.pause();
+
+                            })
+                            .catch(function () {
+
+                                /* Autoplay blocked entirely; the
+                                   seeked frame above should still
+                                   be visible on its own. */
+
+                            });
+
+                    }
+
+                },
                 { once: true }
             );
 
         }
+
+
+        openingVideo.load();
+        primeFirstFrame();
 
 
         function openMainWebsite() {
