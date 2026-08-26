@@ -1002,12 +1002,16 @@
                 letter-spacing: 1px;
             }
 
+            .story-overlay {
+                padding-top: 95px;
+            }
+
             .story-slider-area {
                 width: 100%;
 
-                height: min(52vh, 420px);
+                height: min(46vh, 380px);
 
-                margin-top: 32px;
+                margin-top: 20px;
             }
 
             .story-card {
@@ -1137,15 +1141,15 @@
             }
 
             .story-overlay {
-                padding: 45px 8px 16px;
+                padding: 75px 8px 16px;
 
                 gap: 12px;
             }
 
             .story-slider-area {
-                height: min(48vh, 360px);
+                height: min(42vh, 320px);
 
-                margin-top: 50px;
+                margin-top: 16px;
             }
 
             .story-card {
@@ -1694,10 +1698,20 @@
            RSVP
         ========================================= */
 
+        const rsvpWhatsAppNumber = "919910948594";
+
+
         function rsvpYes() {
 
-            alert(
-                "Thank you! We can't wait to celebrate with you ❤️"
+            const message =
+                "Hi! I'm excited to confirm — count us in for Hetvi & Manan's wedding! ❤️";
+
+            window.open(
+                "https://wa.me/" +
+                rsvpWhatsAppNumber +
+                "?text=" +
+                encodeURIComponent(message),
+                "_blank"
             );
 
         }
@@ -1705,8 +1719,15 @@
 
         function rsvpNo() {
 
-            alert(
-                "We will miss you, but thank you for letting us know ❤️"
+            const message =
+                "Hi! Sadly, I won't be able to make it to Hetvi & Manan's wedding. Sending my love and best wishes! ❤️";
+
+            window.open(
+                "https://wa.me/" +
+                rsvpWhatsAppNumber +
+                "?text=" +
+                encodeURIComponent(message),
+                "_blank"
             );
 
         }
