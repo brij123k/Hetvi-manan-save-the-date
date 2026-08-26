@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Wedding Invitation</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            background: #f3eeea;
+        }
+
+        .site {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================
+           MAIN WEDDING PAGE
+        ========================================= */
+
+        .second-page {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+
+            background-image:
+                url("./bg.jpg.jpeg");
+
+            background-size: cover;
+            background-position: center top;
+            background-repeat: repeat-y;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================
+           DECORATIVE FLOWERS
+        ========================================= */
+
+        .floral-deco {
+            position: absolute;
+            width: 110px;
+            height: auto;
+            opacity: 0.95;
+            pointer-events: none;
+        }
+
+        .floral-deco.deco-tr {
+            top: 6px;
+            right: -18px;
+            transform: rotate(8deg);
+            z-index: 2;
+        }
+
+        .floral-deco.deco-bl {
+            bottom: -10px;
+            left: -22px;
+            transform:
+                scaleX(-1)
+                rotate(6deg);
+
+            z-index: 0;
+            width: 95px;
+        }
+
+        .floral-deco.deco-br {
+            bottom: -6px;
+            right: -20px;
+
+            transform:
+                rotate(190deg);
+
+            z-index: 0;
+            width: 100px;
+        }
+
+
+        /* =========================================
+           ENVELOPE
+        ========================================= */
+
+        .envelope-section {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 40px 15px 0;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .envelope-wrapper {
+            width:
+                min(100%, 440px);
+        }
+
+        .envelope-card {
+            width: 100%;
+            height: auto;
+
+            display: block;
+
+            filter:
+                drop-shadow(
+                    0 15px 25px
+                    rgba(0, 0, 0, 0.18)
+                );
+        }
+
+
+        /* =========================================
+           NOTE
+        ========================================= */
+
+        :root {
+            --note-overlap: -70px;
+            --story-overlap: -150px;
+        }
+
+        .note-section {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 0 15px 10px;
+
+            position: relative;
+            z-index: 2;
+
+            margin-top:
+                var(--note-overlap);
+        }
+
+        .note-wrapper {
+            width:
+                min(100%, 400px);
+        }
+
+        .note-card {
+            width: 100%;
+            height: auto;
+
+            display: block;
+
+            filter:
+                drop-shadow(
+                    0 10px 25px
+                    rgba(0, 0, 0, 0.10)
+                );
+        }
+
+
+        /* =========================================
+           POST CARD
+        ========================================= */
+
+        .story-card-section {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 0 15px 50px;
+
+            position: relative;
+
+            z-index: 3;
+
+            margin-top:
+                var(--story-overlap);
+
+            overflow: visible;
+        }
+
+        .story-card-wrapper {
+            position: relative;
+
+            width:
+                min(100%, 440px);
+
+            margin-top: 30px;
+        }
+
+        .post-card {
+            width: 100%;
+            height: auto;
+
+            display: block;
+
+            position: relative;
+
+            z-index: 1;
+
+            transform:
+                rotate(-5deg);
+
+            cursor: pointer;
+
+            filter:
+                drop-shadow(
+                    0 15px 25px
+                    rgba(0, 0, 0, 0.18)
+                );
+
+            transition:
+                transform 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform:
+                rotate(-5deg)
+                scale(1.02);
+        }
+
+
+        /* =========================================
+           VINYL
+        ========================================= */
+
+        .vinyl {
+            position: absolute;
+
+            width: 36%;
+            height: auto;
+
+            left: 0%;
+            top: -14%;
+
+            z-index: 5;
+
+            cursor: pointer;
+
+            filter:
+                drop-shadow(
+                    0 10px 15px
+                    rgba(0, 0, 0, 0.25)
+                );
+
+            animation:
+                vinylFloat
+                4s
+                ease-in-out
+                infinite;
+        }
+
+        .vinyl.is-playing {
+            animation:
+                vinylSpin
+                2.4s
+                linear
+                infinite;
+        }
+
+        @keyframes vinylSpin {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+        @keyframes vinylFloat {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(-4deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-8px)
+                    rotate(2deg);
+            }
+
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(-4deg);
+            }
+
+        }
+
+
+        /* =========================================
+           COUNTDOWN
+        ========================================= */
+
+        .countdown-section {
+            width: 100%;
+
+            text-align: center;
+
+            padding:
+                30px
+                20px
+                60px;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .countdown-heading {
+            width:
+                min(100%, 420px);
+
+            height: auto;
+
+            display: inline-block;
+
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: flex-start;
+
+            gap: 6px;
+        }
+
+        .time-box {
+            min-width: 78px;
+            text-align: center;
+        }
+
+        .time-number {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-weight: 600;
+
+            font-size: 44px;
+
+            color: #c69973;
+
+            letter-spacing: 1px;
+        }
+
+        .time-label {
+            margin-top: 18px;
+
+            font-family:
+                "Montserrat",
+                sans-serif;
+
+            font-weight: 600;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            color: #2c2a28;
+
+            white-space: nowrap;
+        }
+
+        .separator {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 34px;
+
+            font-weight: 600;
+
+            color: #c69973;
+        }
+
+
+        /* =========================================
+           WEDDING IMAGE
+        ========================================= */
+
+        .wedding-section {
+            position: relative;
+
+            width: 100%;
+            height: 400px;
+
+            overflow: hidden;
+        }
+
+        .wedding-image {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            object-position: center;
+        }
+
+
+        /* =========================================
+           RSVP
+        ========================================= */
+
+        .rsvp-section {
+            width: 100%;
+
+            min-height: 400px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            position: relative;
+
+            overflow: visible;
+        }
+
+        .rsvp-content {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .rsvp-title {
+            font-size: 32px;
+
+            font-style: italic;
+
+            font-weight: 500;
+
+            color: #77665a;
+
+            margin-bottom: 12px;
+        }
+
+        .rsvp-decoration {
+            color: #a38a73;
+
+            font-size: 25px;
+
+            margin-bottom: 25px;
+        }
+
+        .rsvp-text {
+            font-family:
+                "Montserrat",
+                sans-serif;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            letter-spacing: 2px;
+
+            color: #71675f;
+
+            margin-bottom: 35px;
+        }
+
+        .rsvp-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .rsvp-button {
+            min-width: 145px;
+
+            padding:
+                14px
+                18px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-family:
+                "Montserrat",
+                sans-serif;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            transition:
+                transform
+                0.3s
+                ease;
+        }
+
+        .rsvp-button:hover {
+            transform:
+                translateY(-3px);
+        }
+
+        .yes-button {
+            background: #8d9189;
+        }
+
+        .no-button {
+            background: #a48e83;
+        }
+
+
+        /* =========================================
+           OUR STORY PAGE
+           background2.jpeg
+        ========================================= */
+
+        .story-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100vh;
+
+            z-index: 9999;
+
+            background-image:
+                url("./background2.jpg");
+
+            background-size: cover;
+
+            background-position:
+                center center;
+
+            background-repeat: no-repeat;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition:
+                opacity
+                0.5s
+                ease;
+
+            overflow: hidden;
+        }
+
+        .story-overlay.active {
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+        }
+
+
+        /* =========================================
+           CLOSE BUTTON
+        ========================================= */
+
+        .story-close {
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            width: 42px;
+            height: 42px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.75);
+
+            color: #5b5149;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            z-index: 100;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* =========================================
+           STORY SLIDER AREA
+        ========================================= */
+
+        .story-slider-area {
+            position: absolute;
+
+            top: 32%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width:
+                min(90vw, 720px);
+
+            height: 470px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: visible;
+        }
+
+
+        /* =========================================
+           STORY CARD — image IS the card now
+        ========================================= */
+
+        .story-card {
+            position: absolute;
+
+            width: min(58vw, 340px);
+            height: 460px;
+
+            /* no more cream mat, no big padding */
+            padding: 0;
+            background: transparent;
+            border: none;
+
+            border-radius: 20px;
+            overflow: hidden; /* clips the image to the rounded corners */
+
+            box-shadow:
+                0 12px 30px
+                rgba(67, 51, 35, 0.25);
+
+            transition:
+                transform
+                0.6s
+                cubic-bezier(.22,.61,.36,1),
+
+                opacity
+                0.6s
+                ease;
+
+            opacity: 0;
+        }
+
+
+        /* ACTIVE CENTER CARD */
+
+        .story-card.active {
+            z-index: 10;
+
+            transform:
+                translateX(0)
+                scale(1);
+
+            opacity: 1;
+        }
+
+
+        /* PREVIOUS CARD */
+
+        .story-card.prev {
+            z-index: 3;
+
+            transform:
+                translateX(-52%)
+                rotate(-4deg)
+                scale(0.9);
+
+            opacity: 0.9;
+        }
+
+
+        /* NEXT CARD */
+
+        .story-card.next {
+            z-index: 3;
+
+            transform:
+                translateX(52%)
+                rotate(4deg)
+                scale(0.9);
+
+            opacity: 0.9;
+        }
+
+
+        /* HIDDEN LEFT */
+
+        .story-card.hidden-left {
+            z-index: 1;
+
+            transform:
+                translateX(-140%)
+                scale(0.8);
+
+            opacity: 0;
+        }
+
+
+        /* HIDDEN RIGHT */
+
+        .story-card.hidden-right {
+            z-index: 1;
+
+            transform:
+                translateX(140%)
+                scale(0.8);
+
+            opacity: 0;
+        }
+
+
+        /* =========================================
+           YEAR — small overlay pill, top of the photo
+        ========================================= */
+
+        .story-year {
+            position: absolute;
+
+            top: 14px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            font-family:
+                "Montserrat",
+                sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            letter-spacing: 3px;
+
+            color: #fff;
+
+            padding: 5px 14px;
+
+            background:
+                rgba(0, 0, 0, 0.28);
+
+            border-radius: 20px;
+
+            backdrop-filter: blur(2px);
+
+            z-index: 5;
+        }
+
+
+        /* =========================================
+           STORY IMAGE — fills the whole card
+        ========================================= */
+
+        .story-image {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            display: block;
+        }
+
+
+        /* Gradient scrim behind the bottom caption so it
+           stays readable sitting on top of the photo */
+
+        .story-card::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 45%;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0)
+                );
+
+            pointer-events: none;
+
+            z-index: 4;
+        }
+
+
+        /* =========================================
+           STORY CAPTION — overlay at bottom of photo
+        ========================================= */
+
+        .story-caption {
+            position: absolute;
+
+            left: 5px;
+            right: 5px;
+
+            bottom: 18px;
+
+            text-align: center;
+
+            font-family:
+                "Alex Brush",
+                cursive;
+
+            font-size:
+                clamp(
+                    24px,
+                    3vw,
+                    38px
+                );
+
+            line-height: 1;
+
+            color: #fff;
+
+            z-index: 6;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+
+        .story-navigation {
+            position: absolute;
+
+            top: calc(32% + 480px);
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 45px;
+
+            z-index: 50;
+        }
+
+        .story-nav-btn {
+            border: none;
+
+            background: transparent;
+
+            color: #554a43;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 62px;
+
+            font-weight: 400;
+
+            line-height: 1;
+
+            cursor: pointer;
+
+            padding: 0 8px;
+
+            transition:
+                transform
+                0.25s
+                ease;
+        }
+
+        .story-nav-btn:hover {
+            transform:
+                scale(1.15);
+        }
+
+
+        /* =========================================
+           MOBILE RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 650px) {
+
+            :root {
+                --note-overlap: -50px;
+                --story-overlap: -110px;
+            }
+
+            .floral-deco {
+                width: 70px;
+            }
+
+            .floral-deco.deco-bl {
+                width: 62px;
+            }
+
+            .floral-deco.deco-br {
+                width: 66px;
+            }
+
+            .second-page {
+                background-size: 100% auto;
+
+                background-position:
+                    center top;
+
+                background-repeat:
+                    repeat-y;
+            }
+
+            .envelope-section {
+                padding:
+                    26px
+                    10px
+                    0;
+            }
+
+            .note-section {
+                padding:
+                    0
+                    10px
+                    10px;
+            }
+
+            .story-card-section {
+                padding:
+                    0
+                    10px
+                    40px;
+            }
+
+            .story-card-wrapper {
+                margin-top: 30px;
+            }
+
+            .vinyl {
+                width: 35%;
+                top: -12%;
+            }
+
+            .countdown-heading {
+                width:
+                    min(92%, 340px);
+
+                margin-bottom: 22px;
+            }
+
+            .countdown {
+                gap: 2px;
+            }
+
+            .time-box {
+                min-width: 58px;
+            }
+
+            .time-number {
+                font-size: 30px;
+            }
+
+            .time-label {
+                font-size: 8.5px;
+
+                letter-spacing: 1.2px;
+            }
+
+            .separator {
+                font-size: 28px;
+            }
+
+            .wedding-section {
+                height: 310px;
+            }
+
+            .rsvp-section {
+                min-height: 350px;
+
+                padding:
+                    60px
+                    15px;
+            }
+
+
+            /* STORY PAGE MOBILE */
+
+            .story-overlay {
+                background-size: cover;
+
+                background-position:
+                    center center;
+            }
+
+            .story-close {
+                top: 15px;
+                right: 15px;
+
+                width: 38px;
+                height: 38px;
+
+                font-size: 21px;
+            }
+
+            .story-slider-area {
+                top: 30%;
+
+                width: 100%;
+
+                height: 420px;
+            }
+
+            .story-card {
+                width: 55vw;
+
+                max-width: 300px;
+
+                height: 400px;
+
+                border-radius: 18px;
+            }
+
+            .story-card.prev {
+                transform:
+                    translateX(-52%)
+                    rotate(-4deg)
+                    scale(0.9);
+            }
+
+            .story-card.next {
+                transform:
+                    translateX(52%)
+                    rotate(4deg)
+                    scale(0.9);
+            }
+
+            .story-year {
+                font-size: 11px;
+
+                top: 10px;
+            }
+
+            .story-caption {
+                font-size: 24px;
+
+                bottom: 14px;
+            }
+
+            .story-navigation {
+                top: calc(30% + 435px);
+
+                gap: 35px;
+            }
+
+            .story-nav-btn {
+                font-size: 55px;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .story-slider-area {
+                top: 29%;
+            }
+
+            .story-card {
+                width: 58vw;
+
+                height: 370px;
+            }
+
+            .story-caption {
+                font-size: 21px;
+            }
+
+            .story-navigation {
+                top: calc(29% + 400px);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="site">
+
+
+       
+
+        <main class="second-page">
+
+
+            <!-- ENVELOPE -->
+
+            <section class="envelope-section">
+
+                <img
+                    class="floral-deco deco-tr"
+                    src="./flower.png"
+                    alt=""
+                >
+
+                <div class="envelope-wrapper">
+
+                    <img
+                        class="envelope-card"
+                        src="./envelope open.png"
+                        alt="Envelope with photo"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- NOTE -->
+
+            <section class="note-section">
+
+                <div class="note-wrapper">
+
+                    <img
+                        class="note-card"
+                        src="./note.png"
+                        alt="A little note"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 POST CARD
+                 CLICK TO OPEN OUR STORY
+            ====================================== -->
+
+            <section class="story-card-section">
+
+                <img
+                    class="floral-deco deco-bl"
+                    src="./flower.png"
+                    alt=""
+                >
+
+                <div class="story-card-wrapper">
+
+
+                    <img
+                        class="post-card"
+                        src="./post card.png"
+                        alt="Our Story"
+                        onclick="openStory()"
+                    >
+
+
+                    <img
+                        class="vinyl"
+                        id="vinylPlayer"
+                        src="./vinyl.png"
+                        alt="Play Music"
+                        onclick="toggleStoryAudio()"
+                    >
+
+
+                    <audio
+                        id="storyAudio"
+                        src="./play.mp3"
+                        preload="none"
+                    ></audio>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 COUNTDOWN
+            ====================================== -->
+
+            <section class="countdown-section">
+
+                <img
+                    class="countdown-heading"
+                    src="./Group 8.png"
+                    alt="The next chapter begins in"
+                >
+
+
+                <div class="countdown">
+
+
+                    <div class="time-box">
+
+                        <div
+                            class="time-number"
+                            id="days"
+                        >
+                            00
+                        </div>
+
+                        <div class="time-label">
+                            DAYS
+                        </div>
+
+                    </div>
+
+
+                    <div class="separator">
+                        :
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <div
+                            class="time-number"
+                            id="hours"
+                        >
+                            00
+                        </div>
+
+                        <div class="time-label">
+                            HOURS
+                        </div>
+
+                    </div>
+
+
+                    <div class="separator">
+                        :
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <div
+                            class="time-number"
+                            id="minutes"
+                        >
+                            00
+                        </div>
+
+                        <div class="time-label">
+                            MINUTES
+                        </div>
+
+                    </div>
+
+
+                    <div class="separator">
+                        :
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <div
+                            class="time-number"
+                            id="seconds"
+                        >
+                            00
+                        </div>
+
+                        <div class="time-label">
+                            SECONDS
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 WEDDING IMAGE
+            ====================================== -->
+
+            <section class="wedding-section">
+
+                <img
+                    class="wedding-image"
+                    src="./wedding.png"
+                    alt="Wedding"
+                >
+
+            </section>
+
+
+            <!-- =====================================
+                 RSVP
+            ====================================== -->
+
+            <section class="rsvp-section">
+
+                <img
+                    class="floral-deco deco-br"
+                    src="./flower.png"
+                    alt=""
+                >
+
+
+                <div class="rsvp-content">
+
+                    <h2 class="rsvp-title">
+                        So will you be there?
+                    </h2>
+
+
+                    <div class="rsvp-decoration">
+                        ❦
+                    </div>
+
+
+                    <p class="rsvp-text">
+
+                        WE WOULD LOVE TO CELEBRATE
+
+                        <br>
+
+                        THIS SPECIAL DAY WITH YOU
+
+                    </p>
+
+
+                    <div class="rsvp-buttons">
+
+                        <button
+                            class="rsvp-button yes-button"
+                            onclick="rsvpYes()"
+                        >
+                            YES, COUNT US IN!
+                        </button>
+
+
+                        <button
+                            class="rsvp-button no-button"
+                            onclick="rsvpNo()"
+                        >
+                            SADLY, CAN'T MAKE IT
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- =========================================
+             OUR STORY PAGE
+             background2.jpeg
+        ========================================== -->
+
+        <div
+            class="story-overlay"
+            id="storyOverlay"
+        >
+
+
+            <!-- CLOSE -->
+
+            <button
+                class="story-close"
+                onclick="closeStory()"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <!-- =====================================
+                 STORY CARDS
+                 (year + caption text added on top of
+                 each photo — EDIT THESE to your own
+                 years/captions)
+            ====================================== -->
+
+            <div
+                class="story-slider-area"
+                id="storySlider"
+            >
+
+
+                <!-- STORY 1 -->
+
+                <div class="story-card">
+
+                    <div class="story-year">2020</div>
+
+                    <img
+                        class="story-image"
+                        src="./1 (1).png"
+                        alt="Our Story 2020"
+                    >
+
+               
+
+                </div>
+
+
+                <!-- STORY 2 -->
+
+                <div class="story-card">
+
+                    <div class="story-year">2021</div>
+
+                    <img
+                        class="story-image"
+                        src="./2.png"
+                        alt="Our Story 2021"
+                    >
+
+        
+
+                </div>
+
+
+                <!-- STORY 3 -->
+
+                <div class="story-card">
+
+                    <div class="story-year">2022</div>
+
+                    <img
+                        class="story-image"
+                        src="./3 (1).png"
+                        alt="Our Story 2022"
+                    >
+
+    
+
+                </div>
+
+
+                <!-- STORY 4 -->
+
+                <div class="story-card">
+
+                    <div class="story-year">2023</div>
+
+                    <img
+                        class="story-image"
+                        src="./4.png"
+                        alt="Our Story 2023"
+                    >
+
+                  
+
+                </div>
+
+
+                <!-- STORY 5 -->
+
+                <div class="story-card">
+
+                    <div class="story-year">2024</div>
+
+                    <img
+                        class="story-image"
+                        src="./5.png"
+                        alt="Our Story 2024"
+                    >
+
+                 
+
+                </div>
+
+
+                <!-- STORY 6 -->
+
+                <div class="story-card">
+
+                    <div class="story-year">2025</div>
+
+                    <img
+                        class="story-image"
+                        src="./6.png"
+                        alt="Our Story 2025"
+                    >
+
+          
+
+                </div>
+
+
+                <!-- STORY 7 -->
+
+                <div class="story-card">
+
+                    <div class="story-year">2026</div>
+
+                    <img
+                        class="story-image"
+                        src="./7 (1).png"
+                        alt="Our Story 2026"
+                    >
+
+        
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 SLIDER BUTTONS
+            ====================================== -->
+
+            <div class="story-navigation">
+
+
+                <button
+                    class="story-nav-btn"
+                    onclick="changeStory(-1)"
+                    aria-label="Previous Story"
+                >
+                    &lt;
+                </button>
+
+
+                <button
+                    class="story-nav-btn"
+                    onclick="changeStory(1)"
+                    aria-label="Next Story"
+                >
+                    &gt;
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+
+        /* =====================================
+           COUNTDOWN
+        ====================================== */
+
+        const weddingDate =
+            new Date(
+                "January 27, 2027 00:00:00"
+            ).getTime();
+
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+
+            const distance =
+                weddingDate - now;
+
+
+            if (distance <= 0) {
+
+                document
+                    .getElementById("days")
+                    .innerText = "00";
+
+
+                document
+                    .getElementById("hours")
+                    .innerText = "00";
+
+
+                document
+                    .getElementById("minutes")
+                    .innerText = "00";
+
+
+                document
+                    .getElementById("seconds")
+                    .innerText = "00";
+
+
+                return;
+            }
+
+
+            const days =
+                Math.floor(
+                    distance /
+                    (
+                        1000 *
+                        60 *
+                        60 *
+                        24
+                    )
+                );
+
+
+            const hours =
+                Math.floor(
+                    (
+                        distance %
+                        (
+                            1000 *
+                            60 *
+                            60 *
+                            24
+                        )
+                    )
+                    /
+                    (
+                        1000 *
+                        60 *
+                        60
+                    )
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (
+                        distance %
+                        (
+                            1000 *
+                            60 *
+                            60
+                        )
+                    )
+                    /
+                    (
+                        1000 *
+                        60
+                    )
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (
+                        distance %
+                        (
+                            1000 *
+                            60
+                        )
+                    )
+                    /
+                    1000
+                );
+
+
+            document
+                .getElementById("days")
+                .innerText =
+                    String(days)
+                    .padStart(2, "0");
+
+
+            document
+                .getElementById("hours")
+                .innerText =
+                    String(hours)
+                    .padStart(2, "0");
+
+
+            document
+                .getElementById("minutes")
+                .innerText =
+                    String(minutes)
+                    .padStart(2, "0");
+
+
+            document
+                .getElementById("seconds")
+                .innerText =
+                    String(seconds)
+                    .padStart(2, "0");
+
+        }
+
+
+        updateCountdown();
+
+
+        setInterval(
+            updateCountdown,
+            1000
+        );
+
+
+        /* =====================================
+           RSVP
+        ====================================== */
+
+        function rsvpYes() {
+
+            alert(
+                "Thank you! We can't wait to celebrate with you ❤️"
+            );
+
+        }
+
+
+        function rsvpNo() {
+
+            alert(
+                "We will miss you, but thank you for letting us know ❤️"
+            );
+
+        }
+
+
+        /* =====================================
+           VINYL MUSIC
+        ====================================== */
+
+        const storyAudio =
+            document.getElementById(
+                "storyAudio"
+            );
+
+
+        const vinylPlayer =
+            document.getElementById(
+                "vinylPlayer"
+            );
+
+
+        function toggleStoryAudio() {
+
+            if (storyAudio.paused) {
+
+                storyAudio.play();
+
+                vinylPlayer
+                    .classList
+                    .add(
+                        "is-playing"
+                    );
+
+            }
+
+            else {
+
+                storyAudio.pause();
+
+                vinylPlayer
+                    .classList
+                    .remove(
+                        "is-playing"
+                    );
+
+            }
+
+        }
+
+
+        storyAudio.addEventListener(
+            "ended",
+            function () {
+
+                vinylPlayer
+                    .classList
+                    .remove(
+                        "is-playing"
+                    );
+
+            }
+        );
+
+
+        /* =====================================
+           OUR STORY OVERLAY
+        ====================================== */
+
+        const storyOverlay =
+            document.getElementById(
+                "storyOverlay"
+            );
+
+
+        const storyCards =
+            document.querySelectorAll(
+                ".story-card"
+            );
+
+
+        let currentStory = 0;
+
+
+        /* OPEN STORY */
+
+        function openStory() {
+
+            storyOverlay
+                .classList
+                .add(
+                    "active"
+                );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            updateStorySlider();
+
+        }
+
+
+        /* CLOSE STORY */
+
+        function closeStory() {
+
+            storyOverlay
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        /* CHANGE STORY */
+
+        function changeStory(direction) {
+
+            currentStory =
+                (
+                    currentStory +
+                    direction +
+                    storyCards.length
+                )
+                %
+                storyCards.length;
+
+
+            updateStorySlider();
+
+        }
+
+
+        /* =====================================
+           UPDATE STORY SLIDER
+        ====================================== */
+
+        function updateStorySlider() {
+
+            const total =
+                storyCards.length;
+
+
+            const previous =
+                (
+                    currentStory -
+                    1 +
+                    total
+                )
+                %
+                total;
+
+
+            const next =
+                (
+                    currentStory +
+                    1
+                )
+                %
+                total;
+
+
+            storyCards.forEach(
+                function(card, index) {
+
+
+                    card.classList.remove(
+
+                        "active",
+
+                        "prev",
+
+                        "next",
+
+                        "hidden-left",
+
+                        "hidden-right"
+
+                    );
+
+
+                    /* ACTIVE CARD */
+
+                    if (
+                        index === currentStory
+                    ) {
+
+                        card
+                            .classList
+                            .add(
+                                "active"
+                            );
+
+                    }
+
+
+                    /* PREVIOUS CARD */
+
+                    else if (
+                        index === previous
+                    ) {
+
+                        card
+                            .classList
+                            .add(
+                                "prev"
+                            );
+
+                    }
+
+
+                    /* NEXT CARD */
+
+                    else if (
+                        index === next
+                    ) {
+
+                        card
+                            .classList
+                            .add(
+                                "next"
+                            );
+
+                    }
+
+
+                    /* OTHER CARDS */
+
+                    else {
+
+                        const distance =
+                            (
+                                index -
+                                currentStory +
+                                total
+                            )
+                            %
+                            total;
+
+
+                        if (
+                            distance >
+                            total / 2
+                        ) {
+
+                            card
+                                .classList
+                                .add(
+                                    "hidden-left"
+                                );
+
+                        }
+
+                        else {
+
+                            card
+                                .classList
+                                .add(
+                                    "hidden-right"
+                                );
+
+                        }
+
+                    }
+
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           KEYBOARD NAVIGATION
+        ====================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+
+                if (
+                    !storyOverlay
+                        .classList
+                        .contains(
+                            "active"
+                        )
+                ) {
+                    return;
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    changeStory(-1);
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+
+                    changeStory(1);
+
+                }
+
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeStory();
+
+                }
+
+
+            }
+        );
+
+
+
+        /* =====================================
+           FIRST PAGE OPENING
+        ====================================== */
+
+        const openingScreen =
+            document.getElementById("openingScreen");
+
+        const openingEnvelope =
+            document.getElementById("openingEnvelope");
+
+        let invitationOpened = false;
+
+        function openInvitation() {
+
+            if (invitationOpened) return;
+
+            invitationOpened = true;
+
+            openingEnvelope.classList.add("opening");
+
+            setTimeout(function () {
+
+                openingScreen.classList.add("opened");
+
+                document.body.style.overflow = "";
+
+            }, 450);
+
+        }
+
+        openingEnvelope.addEventListener(
+            "click",
+            openInvitation
+        );
+
+        openingEnvelope.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    openInvitation();
+
+                }
+
+            }
+        );
+
+
+        /* INITIALIZE SLIDER */
+
+        updateStorySlider();
+
+
+    </script>
+
+</body>
+</html>
