@@ -1266,7 +1266,7 @@
 
                     <audio
                         id="storyAudio"
-                        src="./play.mp3"
+                        src="https://cdn.shopify.com/s/files/1/0778/9474/6301/files/PLAY.mp3?v=1787724074"
                         preload="none"
                     ></audio>
 
@@ -2167,6 +2167,9 @@
             openingPage.classList.add("playing");
 
             openingVideo.muted = false;
+            openingVideo.defaultMuted = false;
+            openingVideo.removeAttribute("muted");
+            openingVideo.volume = 1;
             openingVideo.currentTime = 0;
 
             const playPromise = openingVideo.play();
