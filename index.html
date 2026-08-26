@@ -72,7 +72,7 @@
 
             z-index: 999999;
 
-            background: #f3eeea;
+            background: #E7E0D7;
 
             cursor: pointer;
 
@@ -99,7 +99,7 @@
 
             display: block;
 
-            object-fit: cover;
+            object-fit: contain;
             object-position: center;
         }
 
@@ -539,40 +539,14 @@
             max-width: 500px;
         }
 
-        .rsvp-title {
-            font-size: 32px;
+        .rsvp-heading {
+            width: min(90%, 420px);
 
-            font-style: italic;
+            height: auto;
 
-            font-weight: 500;
+            display: block;
 
-            color: #77665a;
-
-            margin-bottom: 12px;
-        }
-
-        .rsvp-decoration {
-            color: #a38a73;
-
-            font-size: 25px;
-
-            margin-bottom: 25px;
-        }
-
-        .rsvp-text {
-            font-family:
-                "Montserrat",
-                sans-serif;
-
-            font-size: 10px;
-
-            line-height: 1.6;
-
-            letter-spacing: 2px;
-
-            color: #71675f;
-
-            margin-bottom: 35px;
+            margin: 0 auto 30px;
         }
 
         .rsvp-buttons {
@@ -1120,8 +1094,10 @@
                 padding: 45px 12px;
             }
 
-            .rsvp-title {
-                font-size: 26px;
+            .rsvp-heading {
+                width: min(94%, 340px);
+
+                margin-bottom: 20px;
             }
 
             .rsvp-buttons {
@@ -1396,23 +1372,11 @@
 
                 <div class="rsvp-content">
 
-                    <h2 class="rsvp-title">
-                        So will you be there?
-                    </h2>
-
-                    <div class="rsvp-decoration">
-                        ❦
-                    </div>
-
-                    <p class="rsvp-text">
-
-                        WE WOULD LOVE TO CELEBRATE
-
-                        <br>
-
-                        THIS SPECIAL DAY WITH YOU
-
-                    </p>
+                    <img
+                        class="rsvp-heading"
+                        src="./Group 9.png"
+                        alt="So will you be there? We would love to celebrate this special day with you"
+                    >
 
                     <div class="rsvp-buttons">
 
