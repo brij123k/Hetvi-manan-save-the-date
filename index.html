@@ -72,7 +72,7 @@
 
             z-index: 999999;
 
-            background: #E7E0D7;
+            background: #D6CFC6;
 
             cursor: pointer;
 
@@ -114,11 +114,12 @@
             position: relative;
 
             background-image:
-                url("./bg.jpg.jpeg");
+                url("./bg.jpg.jpeg"),
+                url("./bg2.png");
 
-            background-size: cover;
-            background-position: center top;
-            background-repeat: repeat-y;
+            background-size: cover, cover;
+            background-position: center top, center top;
+            background-repeat: no-repeat, no-repeat;
 
             overflow: hidden;
         }
@@ -905,13 +906,15 @@
             }
 
             .second-page {
-                background-size: 100% auto;
+                background-size: 100% auto, cover;
 
                 background-position:
+                    center top,
                     center top;
 
                 background-repeat:
-                    repeat-y;
+                    no-repeat,
+                    no-repeat;
             }
 
             .envelope-section {
