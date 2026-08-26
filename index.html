@@ -71,7 +71,7 @@
 
             z-index: 999999;
 
-            background: #000;
+            background: #f3eeea;
 
             cursor: pointer;
 
@@ -1085,6 +1085,7 @@
             id="openingVideo"
             src="./video.mp4"
             playsinline
+            muted
             preload="auto"
         ></video>
 
@@ -1884,6 +1885,53 @@
         let videoStarted = false;
 
 
+        /* Show the video's own first frame as the "poster" instead
+           of a black box. Some browsers won't paint a frame until
+           playback has actually started, so we briefly play (muted,
+           so autoplay isn't blocked) and immediately pause. */
+
+        function primeFirstFrame() {
+
+            openingVideo.currentTime = 0;
+
+            const primePromise = openingVideo.play();
+
+            if (primePromise !== undefined) {
+
+                primePromise
+                    .then(function () {
+
+                        openingVideo.pause();
+                        openingVideo.currentTime = 0;
+
+                    })
+                    .catch(function () {
+
+                        /* Autoplay blocked entirely; nothing more
+                           we can do until the user taps. */
+
+                    });
+
+            }
+
+        }
+
+
+        if (openingVideo.readyState >= 2) {
+
+            primeFirstFrame();
+
+        } else {
+
+            openingVideo.addEventListener(
+                "loadeddata",
+                primeFirstFrame,
+                { once: true }
+            );
+
+        }
+
+
         function openMainWebsite() {
 
             if (invitationOpened) {
@@ -1920,6 +1968,9 @@
             videoStarted = true;
 
             openingPage.classList.add("playing");
+
+            openingVideo.muted = false;
+            openingVideo.currentTime = 0;
 
             const playPromise = openingVideo.play();
 
