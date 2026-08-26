@@ -556,7 +556,7 @@
 
             gap: 20px;
 
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .rsvp-button {
@@ -984,6 +984,22 @@
                     15px;
             }
 
+            .rsvp-buttons {
+                gap: 10px;
+            }
+
+            .rsvp-button {
+                min-width: 0;
+
+                flex: 1 1 0;
+
+                padding: 12px 8px;
+
+                font-size: 8px;
+
+                letter-spacing: 1px;
+            }
+
             .story-slider-area {
                 width: 100%;
 
@@ -1101,13 +1117,19 @@
             }
 
             .rsvp-buttons {
-                gap: 12px;
+                gap: 8px;
             }
 
             .rsvp-button {
-                min-width: 130px;
+                min-width: 0;
 
-                padding: 12px 14px;
+                flex: 1 1 0;
+
+                padding: 10px 6px;
+
+                font-size: 7px;
+
+                letter-spacing: 0.6px;
             }
 
             .story-overlay {
