@@ -68,6 +68,7 @@
 
             width: 100%;
             height: 100vh;
+            height: 100dvh;
 
             z-index: 999999;
 
@@ -642,6 +643,7 @@
 
             width: 100%;
             height: 100vh;
+            height: 100dvh;
 
             z-index: 9999;
 
@@ -667,6 +669,15 @@
                 ease;
 
             overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            gap: 18px;
+
+            padding: 60px 12px 24px;
         }
 
         .story-overlay.active {
@@ -718,19 +729,11 @@
         ========================================= */
 
         .story-slider-area {
-            position: absolute;
+            position: relative;
 
-            top: 32%;
+            width: min(90vw, 720px);
 
-            left: 50%;
-
-            transform:
-                translateX(-50%);
-
-            width:
-                min(90vw, 720px);
-
-            height: 470px;
+            height: min(56vh, 470px);
 
             display: flex;
 
@@ -738,14 +741,18 @@
             justify-content: center;
 
             overflow: visible;
+
+            flex: 0 1 auto;
+
+            touch-action: pan-y;
         }
 
         .story-card {
             position: absolute;
 
-            width: min(58vw, 340px);
+            width: min(56vw, 340px);
 
-            height: 460px;
+            height: 100%;
 
             padding: 0;
 
@@ -869,14 +876,7 @@
         }
 
         .story-navigation {
-            position: absolute;
-
-            top: calc(32% + 480px);
-
-            left: 50%;
-
-            transform:
-                translateX(-50%);
+            position: relative;
 
             display: flex;
 
@@ -886,6 +886,8 @@
             gap: 45px;
 
             z-index: 50;
+
+            flex: 0 0 auto;
         }
 
         .story-nav-btn {
@@ -1013,26 +1015,18 @@
             }
 
             .story-slider-area {
-                top: 30%;
-
                 width: 100%;
 
-                height: 420px;
+                height: min(52vh, 420px);
             }
 
             .story-card {
-                width: 55vw;
-
-                max-width: 300px;
-
-                height: 400px;
+                width: min(60vw, 300px);
 
                 border-radius: 18px;
             }
 
             .story-navigation {
-                top: calc(30% + 435px);
-
                 gap: 35px;
             }
 
@@ -1045,18 +1039,123 @@
 
         @media (max-width: 420px) {
 
+            .story-card {
+                width: min(64vw, 280px);
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL PHONES (down to 320px)
+        ========================================= */
+
+        @media (max-width: 380px) {
+
+            .envelope-section {
+                padding: 20px 8px 0;
+            }
+
+            .note-section {
+                padding: 0 8px 8px;
+            }
+
+            .story-card-section {
+                padding: 0 8px 30px;
+            }
+
+            .vinyl {
+                width: 33%;
+            }
+
+            .countdown-heading {
+                width: min(94%, 300px);
+
+                margin-bottom: 18px;
+            }
+
+            .countdown-section {
+                padding: 24px 10px 45px;
+            }
+
+            .countdown {
+                gap: 0;
+            }
+
+            .time-box {
+                min-width: 50px;
+            }
+
+            .time-number {
+                font-size: 24px;
+            }
+
+            .time-label {
+                font-size: 7.5px;
+
+                letter-spacing: 1px;
+            }
+
+            .separator {
+                font-size: 22px;
+            }
+
+            .wedding-section {
+                height: 240px;
+            }
+
+            .rsvp-section {
+                min-height: 300px;
+
+                padding: 45px 12px;
+            }
+
+            .rsvp-title {
+                font-size: 26px;
+            }
+
+            .rsvp-buttons {
+                gap: 12px;
+            }
+
+            .rsvp-button {
+                min-width: 130px;
+
+                padding: 12px 14px;
+            }
+
+            .story-overlay {
+                padding: 45px 8px 16px;
+
+                gap: 12px;
+            }
+
             .story-slider-area {
-                top: 29%;
+                height: min(48vh, 360px);
             }
 
             .story-card {
-                width: 58vw;
+                width: min(66vw, 250px);
 
-                height: 370px;
+                border-radius: 14px;
             }
 
             .story-navigation {
-                top: calc(29% + 400px);
+                gap: 26px;
+            }
+
+            .story-nav-btn {
+                font-size: 46px;
+            }
+
+            .story-close {
+                width: 36px;
+                height: 36px;
+
+                top: 12px;
+                right: 12px;
+
+                font-size: 20px;
             }
 
         }
@@ -1819,6 +1918,76 @@
 
 
         /* =========================================
+           TOUCH SWIPE (mobile story slider)
+        ========================================= */
+
+        const storySliderArea =
+            document.getElementById(
+                "storySlider"
+            );
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchActive = false;
+
+        storySliderArea.addEventListener(
+            "touchstart",
+            function (event) {
+
+                if (event.touches.length !== 1) {
+                    return;
+                }
+
+                touchActive = true;
+                touchStartX = event.touches[0].clientX;
+                touchStartY = event.touches[0].clientY;
+
+            },
+            { passive: true }
+        );
+
+        storySliderArea.addEventListener(
+            "touchend",
+            function (event) {
+
+                if (!touchActive) {
+                    return;
+                }
+
+                touchActive = false;
+
+                const touch = event.changedTouches[0];
+
+                const deltaX = touch.clientX - touchStartX;
+                const deltaY = touch.clientY - touchStartY;
+
+                /* Only treat it as a swipe if the horizontal
+                   movement clearly outweighs vertical movement,
+                   so normal up/down scrolling isn't hijacked. */
+
+                if (
+                    Math.abs(deltaX) > 40 &&
+                    Math.abs(deltaX) > Math.abs(deltaY) * 1.5
+                ) {
+
+                    if (deltaX < 0) {
+
+                        changeStory(1);
+
+                    } else {
+
+                        changeStory(-1);
+
+                    }
+
+                }
+
+            },
+            { passive: true }
+        );
+
+
+        /* =========================================
            KEYBOARD NAVIGATION (story slider)
         ========================================= */
 
@@ -1955,6 +2124,8 @@
         openingVideo.load();
         primeFirstFrame();
 
+        document.body.style.overflow = "hidden";
+
 
         function openMainWebsite() {
 
@@ -1967,6 +2138,8 @@
             openingPage.classList.add(
                 "opening"
             );
+
+            document.body.style.overflow = "";
 
 
             setTimeout(
