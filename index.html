@@ -55,6 +55,20 @@
             width: 100%;
             min-height: 100vh;
             overflow-x: hidden;
+
+            opacity: 0;
+
+            transform: translateY(18px) scale(1.01);
+
+            transition:
+                opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .site.revealed {
+            opacity: 1;
+
+            transform: translateY(0) scale(1);
         }
 
 
@@ -82,15 +96,20 @@
 
             visibility: visible;
 
+            transform: scale(1);
+
             transition:
-                opacity 1.1s ease,
-                visibility 1.1s ease;
+                opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .opening-page.hide {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
+
+            transform: scale(1.04);
         }
 
         .opening-page-video {
@@ -440,7 +459,8 @@
 
         .time-number {
             font-family:
-                "Playfair Display",
+                "Times New Roman",
+                Times,
                 serif;
 
             font-weight: 600;
@@ -460,8 +480,9 @@
             margin-top: 18px;
 
             font-family:
-                "Montserrat",
-                sans-serif;
+                "Times New Roman",
+                Times,
+                serif;
 
             font-weight: 600;
 
@@ -476,7 +497,8 @@
 
         .separator {
             font-family:
-                "Playfair Display",
+                "Times New Roman",
+                Times,
                 serif;
 
             font-size: 34px;
@@ -484,6 +506,27 @@
             font-weight: 600;
 
             color: #c69973;
+        }
+
+
+        /* =========================================
+           LEAF DECORATION (bottom-left corner)
+        ========================================= */
+
+        .leaf-deco {
+            position: absolute;
+
+            bottom: -10px;
+            left: -10px;
+
+            width: 150px;
+            height: auto;
+
+            z-index: 4;
+
+            pointer-events: none;
+
+            opacity: 0.95;
         }
 
 
@@ -909,6 +952,13 @@
                 width: 66px;
             }
 
+            .leaf-deco {
+                width: 100px;
+
+                bottom: -6px;
+                left: -6px;
+            }
+
             .second-page {
                 background-size: 100% auto, 100% auto;
 
@@ -1083,6 +1133,13 @@
                 width: 33%;
             }
 
+            .leaf-deco {
+                width: 80px;
+
+                bottom: -4px;
+                left: -4px;
+            }
+
             .countdown-heading {
                 width: min(60%, 300px);
 
@@ -1217,7 +1274,7 @@
     </div>
 
 
-    <div class="site">
+    <div class="site" id="siteContent">
 
         <main class="second-page">
 
@@ -1438,6 +1495,15 @@
                 </div>
 
             </section>
+
+
+            <!-- LEAF DECORATION -->
+
+            <img
+                class="leaf-deco"
+                src="./leaf.png"
+                alt=""
+            >
 
         </main>
 
@@ -2081,6 +2147,11 @@
                 "openingVideo"
             );
 
+        const siteContent =
+            document.getElementById(
+                "siteContent"
+            );
+
         let invitationOpened = false;
         let videoStarted = false;
 
@@ -2167,8 +2238,24 @@
 
             document.body.style.overflow = "";
 
-            openingPage.classList.add(
-                "hide"
+            siteContent.classList.add(
+                "revealed"
+            );
+
+            /* A brief delay lets the site begin rising into view
+               just before the opening page fades away, so the two
+               motions blend into one smooth crossfade instead of
+               a hard cut. */
+
+            window.setTimeout(
+                function () {
+
+                    openingPage.classList.add(
+                        "hide"
+                    );
+
+                },
+                150
             );
 
         }
