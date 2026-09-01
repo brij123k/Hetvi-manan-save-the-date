@@ -56,19 +56,7 @@
             min-height: 100vh;
             overflow-x: hidden;
 
-            opacity: 0;
-
-            transform: translateY(18px) scale(1.01);
-
-            transition:
-                opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .site.revealed {
             opacity: 1;
-
-            transform: translateY(0) scale(1);
         }
 
 
@@ -108,8 +96,6 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-
-            transform: scale(1.04);
         }
 
         .opening-page-video {
@@ -2238,24 +2224,14 @@
 
             document.body.style.overflow = "";
 
-            siteContent.classList.add(
-                "revealed"
-            );
+            /* The site is already sitting in place underneath the
+               opening page (no motion of its own), so simply
+               fading the opening page out reveals it exactly where
+               it already is — same page, no slide/scale, just the
+               video turning off. */
 
-            /* A brief delay lets the site begin rising into view
-               just before the opening page fades away, so the two
-               motions blend into one smooth crossfade instead of
-               a hard cut. */
-
-            window.setTimeout(
-                function () {
-
-                    openingPage.classList.add(
-                        "hide"
-                    );
-
-                },
-                150
+            openingPage.classList.add(
+                "hide"
             );
 
         }
@@ -2271,17 +2247,14 @@
 
             openingPage.classList.add("playing");
 
-            openingVideo.muted = false;
-            openingVideo.defaultMuted = false;
-            openingVideo.removeAttribute("muted");
-            openingVideo.volume = 1;
             openingVideo.currentTime = 0;
+            openingVideo.playbackRate = 2;
 
             const playPromise = openingVideo.play();
 
-            /* If autoplay-with-sound is blocked, fall back
-               to opening the site right away instead of
-               leaving the invitation stuck. */
+            /* If autoplay is blocked, fall back to opening
+               the site right away instead of leaving the
+               invitation stuck. */
             if (playPromise !== undefined) {
 
                 playPromise.catch(function () {
