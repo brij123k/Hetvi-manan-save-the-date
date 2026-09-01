@@ -59,6 +59,30 @@
             opacity: 1;
         }
 
+        .site .second-page > * {
+            opacity: 0;
+
+            transform: translateY(60px);
+
+            transition:
+                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .site.revealed .second-page > *{
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+        .site .second-page > *:nth-child(1) { transition-delay: 0.05s; }
+        .site .second-page > *:nth-child(2) { transition-delay: 0.15s; }
+        .site .second-page > *:nth-child(3) { transition-delay: 0.25s; }
+        .site .second-page > *:nth-child(4) { transition-delay: 0.35s; }
+        .site .second-page > *:nth-child(5) { transition-delay: 0.45s; }
+        .site .second-page > *:nth-child(6) { transition-delay: 0.55s; }
+        .site .second-page > *:nth-child(7) { transition-delay: 0.65s; }
+
 
         /* =========================================
            FIRST OPENING PAGE
@@ -2225,13 +2249,17 @@
             document.body.style.overflow = "";
 
             /* The site is already sitting in place underneath the
-               opening page (no motion of its own), so simply
-               fading the opening page out reveals it exactly where
-               it already is — same page, no slide/scale, just the
-               video turning off. */
+               opening page, but each section starts shifted down
+               and invisible. Fading the opening page out while
+               adding "revealed" lets every section slide up into
+               place one after another, bottom to top. */
 
             openingPage.classList.add(
                 "hide"
+            );
+
+            siteContent.classList.add(
+                "revealed"
             );
 
         }
