@@ -458,11 +458,11 @@
 
             align-items: flex-start;
 
-            gap: 6px;
+            gap: 10px;
         }
 
         .time-box {
-            min-width: 78px;
+            min-width: 95px;
 
             text-align: center;
         }
@@ -475,7 +475,7 @@
 
             font-weight: 600;
 
-            font-size: 44px;
+            font-size: 62px;
 
             color: #c69973;
 
@@ -496,7 +496,7 @@
 
             font-weight: 600;
 
-            font-size: 14px;
+            font-size: 16px;
 
             letter-spacing: 2px;
 
@@ -511,7 +511,7 @@
                 Times,
                 serif;
 
-            font-size: 34px;
+            font-size: 48px;
 
             font-weight: 600;
 
@@ -1020,25 +1020,25 @@
             }
 
             .countdown {
-                gap: 2px;
+                gap: 6px;
             }
 
             .time-box {
-                min-width: 58px;
+                min-width: 72px;
             }
 
             .time-number {
-                font-size: 30px;
+                font-size: 42px;
             }
 
             .time-label {
-                font-size: 8.5px;
+                font-size: 11px;
 
                 letter-spacing: 1.2px;
             }
 
             .separator {
-                font-size: 28px;
+                font-size: 38px;
             }
 
             .wedding-section {
@@ -1070,7 +1070,9 @@
             }
 
             .story-overlay {
-                padding-top: 195px;
+                padding-top: 100px;
+
+                overflow-y: auto;
             }
 
             .story-slider-area {
@@ -1078,7 +1080,7 @@
 
                 height: min(46vh, 380px);
 
-                margin-top: 45px;
+                margin-top: 20px;
             }
 
             .story-card {
@@ -1161,25 +1163,25 @@
             }
 
             .countdown {
-                gap: 0;
+                gap: 4px;
             }
 
             .time-box {
-                min-width: 50px;
+                min-width: 60px;
             }
 
             .time-number {
-                font-size: 24px;
+                font-size: 34px;
             }
 
             .time-label {
-                font-size: 7.5px;
+                font-size: 9.5px;
 
                 letter-spacing: 1px;
             }
 
             .separator {
-                font-size: 22px;
+                font-size: 30px;
             }
 
             .wedding-section {
@@ -1223,7 +1225,7 @@
             .story-slider-area {
                 height: min(42vh, 320px);
 
-                margin-top: 117px;
+                margin-top: 45px;
             }
 
             .story-card {
@@ -1292,12 +1294,6 @@
             <!-- ENVELOPE -->
 
             <section class="envelope-section">
-<!-- 
-                <img
-                    class="floral-deco deco-tr"
-                    src="./flower.png"
-                    alt=""
-                > -->
 
                 <div class="envelope-wrapper">
 
@@ -1332,12 +1328,6 @@
             <!-- POST CARD -->
 
             <section class="story-card-section">
-
-                <!-- <img
-                    class="floral-deco deco-bl"
-                    src="./flower.png"
-                    alt=""
-                > -->
 
                 <div class="story-card-wrapper">
 
@@ -1470,12 +1460,6 @@
 
             <section class="rsvp-section">
 
-                <!-- <img
-                    class="floral-deco deco-br"
-                    src="./flower.png"
-                    alt=""
-                > -->
-
                 <div class="rsvp-content">
 
                     <img
@@ -1485,20 +1469,6 @@
                     >
 
                     <div class="rsvp-buttons">
-
-                        <!-- <button
-                            class="rsvp-button yes-button"
-                            onclick="rsvpYes()"
-                        >
-                            YES, COUNT US IN!
-                        </button> -->
-
-                        <!-- <button
-                            class="rsvp-button no-button"
-                            onclick="rsvpNo()"
-                        >
-                            SADLY, CAN'T MAKE IT
-                        </button> -->
 
                     </div>
 
@@ -1540,8 +1510,6 @@
             >
 
                 <div class="story-card">
-                
-
                     <img
                         class="story-image"
                         src="./1 (1).png"
@@ -1551,8 +1519,6 @@
 
 
                 <div class="story-card">
-           
-
                     <img
                         class="story-image"
                         src="./2.png"
@@ -1562,8 +1528,6 @@
 
 
                 <div class="story-card">
-            
-
                     <img
                         class="story-image"
                         src="./3 (1).png"
@@ -1573,8 +1537,6 @@
 
 
                 <div class="story-card">
-   
-
                     <img
                         class="story-image"
                         src="./4.png"
@@ -1584,8 +1546,6 @@
 
 
                 <div class="story-card">
-              
-
                     <img
                         class="story-image"
                         src="./5.png"
@@ -1595,8 +1555,6 @@
 
 
                 <div class="story-card">
-               
-
                     <img
                         class="story-image"
                         src="./6.png"
@@ -1606,8 +1564,6 @@
 
 
                 <div class="story-card">
-  
-
                     <img
                         class="story-image"
                         src="./7 (1).png"
@@ -2067,10 +2023,6 @@
                 const deltaX = touch.clientX - touchStartX;
                 const deltaY = touch.clientY - touchStartY;
 
-                /* Only treat it as a swipe if the horizontal
-                   movement clearly outweighs vertical movement,
-                   so normal up/down scrolling isn't hijacked. */
-
                 if (
                     Math.abs(deltaX) > 40 &&
                     Math.abs(deltaX) > Math.abs(deltaY) * 1.5
@@ -2166,15 +2118,6 @@
         let videoStarted = false;
 
 
-        /* Show the video's own first frame as the "poster" instead
-           of a black box. Seeking to a tiny offset forces mobile
-           browsers to decode and paint that frame without needing
-           an actual playback attempt (which mobile browsers are
-           more likely to block before the user has tapped). As a
-           belt-and-suspenders fallback, we also try a quick muted
-           play+pause once the seek lands, since some browsers only
-           paint a frame after playback has briefly started. */
-
         function primeFirstFrame() {
 
             function trySeek() {
@@ -2217,10 +2160,6 @@
                             })
                             .catch(function () {
 
-                                /* Autoplay blocked entirely; the
-                                   seeked frame above should still
-                                   be visible on its own. */
-
                             });
 
                     }
@@ -2248,12 +2187,6 @@
 
             document.body.style.overflow = "";
 
-            /* The site is already sitting in place underneath the
-               opening page, but each section starts shifted down
-               and invisible. Fading the opening page out while
-               adding "revealed" lets every section slide up into
-               place one after another, bottom to top. */
-
             openingPage.classList.add(
                 "hide"
             );
@@ -2280,9 +2213,6 @@
 
             const playPromise = openingVideo.play();
 
-            /* If autoplay is blocked, fall back to opening
-               the site right away instead of leaving the
-               invitation stuck. */
             if (playPromise !== undefined) {
 
                 playPromise.catch(function () {
@@ -2296,23 +2226,17 @@
         }
 
 
-        /* When the video finishes playing, reveal the site */
-
         openingVideo.addEventListener(
             "ended",
             openMainWebsite
         );
 
 
-        /* CLICK / TAP: first tap plays the video */
-
         openingPage.addEventListener(
             "click",
             playOpeningVideo
         );
 
-
-        /* KEYBOARD */
 
         openingPage.addEventListener(
             "keydown",
@@ -2332,8 +2256,6 @@
             }
         );
 
-
-        /* INITIALIZE SLIDER */
 
         updateStorySlider();
 
