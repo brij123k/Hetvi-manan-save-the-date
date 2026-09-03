@@ -2096,7 +2096,7 @@
 
 
         /* =========================================
-           FIRST PAGE: VIDEO -> OPEN MAIN SITE
+           FIRST PAGE: TAP -> VIDEO PLAYS -> VIDEO ENDS -> SITE OPENS
         ========================================= */
 
         const openingPage =
@@ -2157,6 +2157,9 @@
 
                                 openingVideo.pause();
 
+                                // reset back to frame 0 so playback starts clean on tap
+                                openingVideo.currentTime = 0;
+
                             })
                             .catch(function () {
 
@@ -2208,14 +2211,27 @@
 
             openingPage.classList.add("playing");
 
+            // Play the video at NORMAL speed from the start.
+            // (Previously this was forced to 2x speed, which made it
+            // look like the video barely played before the site opened.)
             openingVideo.currentTime = 0;
-            openingVideo.playbackRate = 2;
+            openingVideo.playbackRate = 1;
+            openingVideo.muted = false;
 
             const playPromise = openingVideo.play();
 
             if (playPromise !== undefined) {
 
-                playPromise.catch(function () {
+                playPromise.catch(function (error) {
+
+                    // If the video genuinely cannot play (missing file,
+                    // unsupported format, browser autoplay block, etc.)
+                    // log WHY, then fall back to opening the site so the
+                    // guest is never stuck on a blank screen.
+                    console.error(
+                        "Opening video failed to play, opening site instead:",
+                        error
+                    );
 
                     openMainWebsite();
 
@@ -2226,6 +2242,7 @@
         }
 
 
+        // Only "ended" (the video finishing naturally) should open the site.
         openingVideo.addEventListener(
             "ended",
             openMainWebsite
