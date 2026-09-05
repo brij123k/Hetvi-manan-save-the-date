@@ -158,7 +158,7 @@ opening_html = r'''
                     id="openingEnvelope"
                     role="button"
                     tabindex="0"
-                    aria-label="Tap to open the wedding invitation"
+                    aria-label="Tap to open the save the date "
                 >
                     <img
                         src="./opening-envelope.jpeg"

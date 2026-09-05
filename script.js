@@ -1,5 +1,5 @@
 // ==========================================================================
-// Hetvi & Manan — Wedding Invitation
+// Hetvi & Manan — save the date 
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
