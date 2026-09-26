@@ -238,6 +238,53 @@
                 );
         }
 
+        .envelope-wrapper {
+            position: relative;
+        }
+
+        .envelope-tap-badge {
+            position: absolute;
+
+            width: 44%;
+            height: auto;
+
+            left: 12%;
+            top: 66%;
+
+            z-index: 2;
+
+            transform:
+                rotate(-4deg)
+                scale(1);
+
+            cursor: pointer;
+
+            filter:
+                drop-shadow(
+                    0 8px 14px
+                    rgba(0, 0, 0, 0.28)
+                );
+
+            animation:
+                tapPulse
+                1.8s
+                ease-in-out
+                infinite;
+
+            transition:
+                filter 0.3s ease;
+        }
+
+        .envelope-tap-badge:hover {
+
+            filter:
+                drop-shadow(
+                    0 10px 18px
+                    rgba(0, 0, 0, 0.35)
+                );
+
+        }
+
 
         /* =========================================
            NOTE
@@ -344,6 +391,70 @@
             transform:
                 rotate(-4deg)
                 scale(1.02);
+        }
+
+
+        /* =========================================
+           TAP TO OPEN BADGE (separate popping layer)
+        ========================================= */
+
+        .tap-badge {
+            position: absolute;
+
+            width: 46%;
+            height: auto;
+
+            left: 9%;
+            top: 60%;
+
+            z-index: 2;
+
+            transform:
+                rotate(-4deg)
+                scale(1);
+
+            cursor: pointer;
+
+            filter:
+                drop-shadow(
+                    0 8px 14px
+                    rgba(0, 0, 0, 0.28)
+                );
+
+            animation:
+                tapPulse
+                1.8s
+                ease-in-out
+                infinite;
+
+            transition:
+                filter 0.3s ease;
+        }
+
+        .tap-badge:hover {
+
+            filter:
+                drop-shadow(
+                    0 10px 18px
+                    rgba(0, 0, 0, 0.35)
+                );
+
+        }
+
+        @keyframes tapPulse {
+
+            0%, 100% {
+                transform:
+                    rotate(-4deg)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    rotate(-4deg)
+                    scale(1.07);
+            }
+
         }
 
 
@@ -1006,6 +1117,20 @@
                 margin-top: 30px;
             }
 
+            .tap-badge {
+                width: 48%;
+
+                left: 8%;
+                top: 58%;
+            }
+
+            .envelope-tap-badge {
+                width: 46%;
+
+                left: 10%;
+                top: 64%;
+            }
+
             .vinyl {
                 width: 35%;
 
@@ -1127,6 +1252,44 @@
                 transform:
                     rotate(-3deg)
                     scale(1.02);
+            }
+
+            .tap-badge {
+                width: 38%;
+
+                left: 21%;
+                top: 70%;
+
+                transform:
+                    rotate(-3deg)
+                    scale(1);
+            }
+
+            .envelope-tap-badge {
+                width: 48%;
+
+                left: 9%;
+                top: 62%;
+
+                transform:
+                    rotate(-3deg)
+                    scale(1);
+            }
+
+            @keyframes tapPulse {
+
+                0%, 100% {
+                    transform:
+                        rotate(-3deg)
+                        scale(1);
+                }
+
+                50% {
+                    transform:
+                        rotate(-3deg)
+                        scale(1.07);
+                }
+
             }
 
             .envelope-section {
@@ -1303,6 +1466,13 @@
                         alt="Envelope with photo"
                     >
 
+                    <!-- <img
+                        class="envelope-tap-badge"
+                        id="envelopeTapBadge"
+                        src="./tap to open.png"
+                        alt="Tap to open"
+                    > -->
+
                 </div>
 
             </section>
@@ -1335,6 +1505,14 @@
                         class="post-card"
                         src="./post card.png"
                         alt="Our Story"
+                        onclick="openStory()"
+                    >
+
+                    <img
+                        class="tap-badge"
+                        id="tapBadge"
+                        src="./tap to open.png"
+                        alt="Tap to open"
                         onclick="openStory()"
                     >
 
@@ -1836,6 +2014,11 @@
                 ".story-card"
             );
 
+        const tapBadge =
+            document.getElementById(
+                "tapBadge"
+            );
+
         let currentStory = 0;
 
 
@@ -1847,6 +2030,14 @@
 
             document.body.style.overflow =
                 "hidden";
+
+            // stop the pulse once the guest has opened the story
+            if (tapBadge) {
+
+                tapBadge.style.animation =
+                    "none";
+
+            }
 
             updateStorySlider();
 
