@@ -238,53 +238,6 @@
                 );
         }
 
-        .envelope-wrapper {
-            position: relative;
-        }
-
-        .envelope-tap-badge {
-            position: absolute;
-
-            width: 44%;
-            height: auto;
-
-            left: 12%;
-            top: 66%;
-
-            z-index: 2;
-
-            transform:
-                rotate(-4deg)
-                scale(1);
-
-            cursor: pointer;
-
-            filter:
-                drop-shadow(
-                    0 8px 14px
-                    rgba(0, 0, 0, 0.28)
-                );
-
-            animation:
-                tapPulse
-                1.8s
-                ease-in-out
-                infinite;
-
-            transition:
-                filter 0.3s ease;
-        }
-
-        .envelope-tap-badge:hover {
-
-            filter:
-                drop-shadow(
-                    0 10px 18px
-                    rgba(0, 0, 0, 0.35)
-                );
-
-        }
-
 
         /* =========================================
            NOTE
@@ -362,13 +315,16 @@
             margin-right: auto;
         }
 
-        .post-card {
-            width: 100%;
-            height: auto;
+        /*
+           The card image and the TAP TO OPEN badge live inside ONE
+           container. The container is what gets rotated, so the badge
+           always moves together with the card at every screen size.
+        */
 
-            display: block;
-
+        .postcard-stack {
             position: relative;
+
+            width: 100%;
 
             z-index: 1;
 
@@ -387,37 +343,40 @@
                 transform 0.3s ease;
         }
 
-        .post-card:hover {
+        .postcard-stack:hover {
             transform:
                 rotate(-4deg)
                 scale(1.02);
         }
 
+        .post-card {
+            width: 100%;
+            height: auto;
+
+            display: block;
+        }
+
 
         /* =========================================
-           TAP TO OPEN BADGE (separate popping layer)
+           TAP TO OPEN BADGE
+           (percentages are measured on the card itself,
+            so no media-query overrides are needed)
         ========================================= */
 
         .tap-badge {
             position: absolute;
 
-            width: 38%;
-            height: auto;
+            left: 26%;
+            top: 68%;
 
-            left: 21%;
-            top: 70%;
+            width: 31%;
+            height: auto;
 
             z-index: 2;
 
-            transform:
-                rotate(-4deg)
-                scale(1);
-
-            cursor: pointer;
-
             filter:
                 drop-shadow(
-                    0 8px 14px
+                    0 6px 10px
                     rgba(0, 0, 0, 0.28)
                 );
 
@@ -426,33 +385,16 @@
                 1.8s
                 ease-in-out
                 infinite;
-
-            transition:
-                filter 0.3s ease;
-        }
-
-        .tap-badge:hover {
-
-            filter:
-                drop-shadow(
-                    0 10px 18px
-                    rgba(0, 0, 0, 0.35)
-                );
-
         }
 
         @keyframes tapPulse {
 
             0%, 100% {
-                transform:
-                    rotate(-4deg)
-                    scale(1);
+                transform: scale(1);
             }
 
             50% {
-                transform:
-                    rotate(-4deg)
-                    scale(1.07);
+                transform: scale(1.07);
             }
 
         }
@@ -1117,20 +1059,6 @@
                 margin-top: 30px;
             }
 
-            .tap-badge {
-                width: 48%;
-
-                left: 8%;
-                top: 58%;
-            }
-
-            .envelope-tap-badge {
-                width: 46%;
-
-                left: 10%;
-                top: 64%;
-            }
-
             .vinyl {
                 width: 35%;
 
@@ -1244,52 +1172,14 @@
                 width: min(85%, 400px);
             }
 
-            .post-card {
+            .postcard-stack {
                 transform: rotate(-3deg);
             }
 
-            .post-card:hover {
+            .postcard-stack:hover {
                 transform:
                     rotate(-3deg)
                     scale(1.02);
-            }
-
-            .tap-badge {
-                width: 38%;
-
-                left: 21%;
-                top: 70%;
-
-                transform:
-                    rotate(-3deg)
-                    scale(1);
-            }
-
-            .envelope-tap-badge {
-                width: 48%;
-
-                left: 9%;
-                top: 62%;
-
-                transform:
-                    rotate(-3deg)
-                    scale(1);
-            }
-
-            @keyframes tapPulse {
-
-                0%, 100% {
-                    transform:
-                        rotate(-3deg)
-                        scale(1);
-                }
-
-                50% {
-                    transform:
-                        rotate(-3deg)
-                        scale(1.07);
-                }
-
             }
 
             .envelope-section {
@@ -1466,13 +1356,6 @@
                         alt="Envelope with photo"
                     >
 
-                    <!-- <img
-                        class="envelope-tap-badge"
-                        id="envelopeTapBadge"
-                        src="./tap to open.png"
-                        alt="Tap to open"
-                    > -->
-
                 </div>
 
             </section>
@@ -1501,20 +1384,38 @@
 
                 <div class="story-card-wrapper">
 
-                    <img
-                        class="post-card"
-                        src="./post card.png"
-                        alt="Our Story"
+                    <!--
+                        Card + badge share ONE rotating container,
+                        so the badge never drifts at any screen size.
+                        IMPORTANT: post card.png must be the CLEAN card
+                        (no TAP TO OPEN baked into the image).
+                        Set width/height below to your real image pixel
+                        sizes (only the ratio matters).
+                    -->
+
+                    <div
+                        class="postcard-stack"
                         onclick="openStory()"
                     >
 
-                    <img
-                        class="tap-badge"
-                        id="tapBadge"
-                        src="./tap to open.png"
-                        alt="Tap to open"
-                        onclick="openStory()"
-                    >
+                        <img
+                            class="post-card"
+                            src="./post card.png"
+                            alt="Our Story"
+                            width="1200"
+                            height="945"
+                        >
+
+                        <img
+                            class="tap-badge"
+                            id="tapBadge"
+                            src="./tap to open.png"
+                            alt="Tap to open"
+                            width="370"
+                            height="115"
+                        >
+
+                    </div>
 
                     <img
                         class="vinyl"
@@ -2403,8 +2304,6 @@
             openingPage.classList.add("playing");
 
             // Play the video at NORMAL speed from the start.
-            // (Previously this was forced to 2x speed, which made it
-            // look like the video barely played before the site opened.)
             openingVideo.currentTime = 0;
             openingVideo.playbackRate = 1;
             openingVideo.muted = false;
