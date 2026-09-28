@@ -1428,7 +1428,8 @@
                     <audio
                         id="storyAudio"
                         src="https://cdn.shopify.com/s/files/1/0778/9474/6301/files/videoplayback_1.mp3?v=1788118092"
-                        preload="none"
+                        preload="auto"
+                        loop
                     ></audio>
 
                 </div>
@@ -1902,6 +1903,69 @@
 
 
         /* =========================================
+           AUTO-PLAY MUSIC (called when page 2 opens)
+        ========================================= */
+
+        function startMusic() {
+
+            const attempt = storyAudio.play();
+
+            if (attempt === undefined) {
+                return;
+            }
+
+            attempt
+                .then(function () {
+
+                    vinylPlayer.classList.add(
+                        "is-playing"
+                    );
+
+                })
+                .catch(function () {
+
+                    // Browser blocked it: start on the guest's first
+                    // tap / key press instead (one time only).
+                    const events = [
+                        "pointerdown",
+                        "touchend",
+                        "keydown"
+                    ];
+
+                    function retry() {
+
+                        events.forEach(function (name) {
+                            document.removeEventListener(
+                                name,
+                                retry
+                            );
+                        });
+
+                        storyAudio.play()
+                            .then(function () {
+
+                                vinylPlayer.classList.add(
+                                    "is-playing"
+                                );
+
+                            })
+                            .catch(function () {});
+
+                    }
+
+                    events.forEach(function (name) {
+                        document.addEventListener(
+                            name,
+                            retry
+                        );
+                    });
+
+                });
+
+        }
+
+
+        /* =========================================
            OUR STORY SLIDER
         ========================================= */
 
@@ -2290,6 +2354,16 @@
                 "revealed"
             );
 
+            // page 2 is open -> start the music
+            startMusic();
+
+            // and start watching the scroll for the post card
+            window.addEventListener(
+                "scroll",
+                checkPostCardReached,
+                { passive: true }
+            );
+
         }
 
 
@@ -2304,6 +2378,24 @@
             openingPage.classList.add("playing");
 
             // Play the video at NORMAL speed from the start.
+            // Unlock the music inside this tap (browsers only allow
+            // audio that starts from a user gesture). It is paused
+            // straight away and really starts when page 2 opens.
+            const unlock = storyAudio.play();
+
+            if (unlock !== undefined) {
+
+                unlock
+                    .then(function () {
+
+                        storyAudio.pause();
+                        storyAudio.currentTime = 0;
+
+                    })
+                    .catch(function () {});
+
+            }
+
             openingVideo.currentTime = 0;
             openingVideo.playbackRate = 1;
             openingVideo.muted = false;
@@ -2362,6 +2454,58 @@
 
             }
         );
+
+
+        /* =========================================
+           SCROLL TO POST CARD -> OPEN PAGE 3 (STORY)
+        ========================================= */
+
+        const postCardEl =
+            document.querySelector(
+                ".postcard-stack"
+            );
+
+        let storyAutoOpened = false;
+
+        function checkPostCardReached() {
+
+            if (
+                storyAutoOpened ||
+                !invitationOpened ||
+                storyOverlay.classList.contains("active")
+            ) {
+                return;
+            }
+
+            // guest must actually have scrolled a little
+            if (window.scrollY < 30) {
+                return;
+            }
+
+            const rect =
+                postCardEl.getBoundingClientRect();
+
+            const cardCenter =
+                rect.top + rect.height / 2;
+
+            // card centre is inside the upper-middle of the screen
+            if (
+                cardCenter <= window.innerHeight * 0.6 &&
+                cardCenter >= window.innerHeight * 0.15
+            ) {
+
+                storyAutoOpened = true;
+
+                window.removeEventListener(
+                    "scroll",
+                    checkPostCardReached
+                );
+
+                openStory();
+
+            }
+
+        }
 
 
         updateStorySlider();
